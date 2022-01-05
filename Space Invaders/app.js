@@ -1,83 +1,110 @@
 
-let grille1 = document.createElement("table")
-grille1.setAttribute('id','tab')
+const container = document.querySelector('.grille');
+const affichage = document.querySelector('h3');
+let resultats = 0;
+let toutesLesDivs;
+let alienInvaders = [];
+let tireurPosition = 229;
+let direction = 1;
+let width = 20;
 
-function ajouterEnnemies(){
-    let ligne = $('#tab').find('tr')
-    for (let i = 4; i <= 15 ; i++){
-        ligne[0].children[i].setAttribute('class','alien')
-        ligne[1].children[i].setAttribute('class','alien')
+function creationGrilleEtAliens(){
+
+    let indexAttr = 0;
+
+    for(i = 0; i < 240; i++){
+
+        if(indexAttr === 0){
+            const bloc = document.createElement('div');
+            bloc.setAttribute('data-left', 'true');
+            container.appendChild(bloc);
+            indexAttr++;
+        } 
+        else if(indexAttr === 19){
+            const bloc = document.createElement('div');
+            bloc.setAttribute('data-right', 'true');
+            container.appendChild(bloc);
+            indexAttr = 0;
+        } 
+        else {
+            const bloc = document.createElement('div');
+            container.appendChild(bloc);
+            indexAttr++;
+        }
+
     }
+
+
+    for(i = 1; i < 53; i++ ){
+
+      if(i === 13){
+          i = 21;
+          alienInvaders.push(i);
+      } else if (i === 33){
+          i = 41;
+          alienInvaders.push(i);
+      } else {
+          alienInvaders.push(i);
+      }
+
+    }
+    console.log(alienInvaders);
+
+    toutesLesDivs = document.querySelectorAll('.grille div');
+    alienInvaders.forEach(invader => {
+        toutesLesDivs[invader].classList.add('alien');
+    })
+
+    toutesLesDivs[tireurPosition].classList.add('tireur');
+
+    console.log(toutesLesDivs)
 }
 
-function mouvementEnnemies(){
-    let ligne = $('#tab').find('tr')
-    for (let j = 0; j < ligne.length ; j++){
-        let colonne = ligne[j].children
-        console.log(ligne[j])
-        for (let i = 0; i < colonne.length; i++){
-            if (colonne[i].className == 'alien'){
-                if (colonne[i + 1].className != 'alien'){
-                    colonne[i+1].classList.add('alien')
-                    break
-                }
-                colonne[i+1].classList.add('alien')
+creationGrilleEtAliens()
 
-                console.log(colonne[i])
+let downRight = true
+let downLeft = true
+function mouvementAliens(){
+
+    for (let i = 0; i < alienInvaders.length; i++){
+        if (toutesLesDivs[alienInvaders[i]].getAttribute('data-right') === 'true'){
+            if(downLeft == true){
+                direction = 20
+                setTimeout(()=>{
+                    downLeft = false
+                },100)
             }
+            else if (downLeft== false){
+                direction = -1
+            }
+            downRight = true
         }
     }
 
-
-    // for (let i = 0 ; i < ligne.length ; i++){
-    //     console.log(ligne[i])
-    //     if (ligne[i].children.length != 0){
-    //         for (let j = 0; j < ligne[i].children.length; j++ ){
-    //             ligne[i + 1].append(ligne[i].children[j])
-                
-    //         }
-    //         break
-    //     }
-    // }
-}
-function creationGrille(){
-    for (let i = 0; i< 20 ; i++){
-
-        let ligne = document.createElement('tr')
-        ligne.setAttribute('id','ligne')
-        grille1.appendChild(ligne)
-    
-    }
-    var ligne = $('#tab').find('tr')
-    for (let j = 0; j < ligne.length; j++){
-        for (let i = 0; i < 20; i++ ){
-            let colonne = document.createElement('td')
-            colonne.setAttribute('style',' width : 50px;')
-            ligne[j].append(colonne)
+    for (let i = 0; i < alienInvaders.length; i++){
+        if (toutesLesDivs[alienInvaders[i]].getAttribute('data-left') === 'true'){
+            if(downRight == true){
+                direction = 20
+                setTimeout(()=>{
+                    downRight = false
+                },100)
+            }
+            else if (downRight== false){
+                direction = 1
+            }
+            downLeft = true
         }
     }
-    
+
+    for (let i = 0; i < alienInvaders.length; i++){
+        toutesLesDivs[alienInvaders[i]].classList.remove('alien')
+    }
+    for (let i = 0; i < alienInvaders.length; i++){
+        alienInvaders[i] += direction
+    }
+    for (let i = 0; i <alienInvaders.length; i++) {
+        toutesLesDivs[alienInvaders[i]].classList.add('alien')
+    }
 }
 
-// grille1.childNodes.forEach(element => {
-//     for(let i = 0 ; i < 12 ; i++){
-
-//         let colonne = document.createElement('td')
-//         /*colonne.setAttribute('class','alien')*/
-//         colonne.setAttribute('style','background-color : red; width : 50px; border-width : 5px; border-color : red; background-repeat : no-repeat;')
-//         element.appendChild(colonne)
-        
-
-//     }
-// });
-
-
-let grilleJeu = $('.grille')
-
-grilleJeu.append(grille1)
-
-creationGrille()
-setInterval(ajouterEnnemies(), 10000)
-setInterval(mouvementEnnemies, 10000)
-// mouvementEnnemies()
-
+let mouvement = setInterval(mouvementAliens,500)
