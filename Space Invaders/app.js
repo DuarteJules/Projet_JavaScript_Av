@@ -7,6 +7,8 @@ let alienInvaders = [];
 let tireurPosition = 229;
 let direction = 1;
 let width = 20;
+let fin = false
+let score = 0
 
 function creationGrilleEtAliens(){
 
@@ -112,9 +114,111 @@ function mouvementAliens(){
             toutesLesDivs[tireurPosition].classList.add('boom')
             toutesLesDivs[tireurPosition].classList.remove('alien')
             affichage.innerHTML = 'Game over'
-
+            fin = true
         }
+    }
+    finDeJeu()
+}
+
+let mouvement = setInterval(mouvementAliens,500)
+
+function laser(){
+    let tir = tireurPosition
+    let laser = setInterval(() => {
+        if(tir>19){
+            tir -= 20 
+            toutesLesDivs[tir].classList.add('laser')
+            toutesLesDivs[tir + 20].classList.remove('laser')
+        }
+        else{
+            toutesLesDivs[tir].classList.remove('laser')
+            clearInterval(laser)
+        }
+
+        for (let i = 0; i < alienInvaders.length; i++){
+            if(toutesLesDivs[alienInvaders[i]].classList.contains('alien') && toutesLesDivs[alienInvaders[i]].classList.contains('laser')){
+                toutesLesDivs[alienInvaders[i]].classList.remove('alien')
+                toutesLesDivs[tir].classList.remove('laser')
+                toutesLesDivs[alienInvaders[i]].classList.add('boom')
+                score++
+                affichage.innerHTML = 'Score : ' + score
+                setTimeout(() => {
+                    toutesLesDivs[alienInvaders[i]].classList.remove('boom')
+                    alienInvaders.splice(i,1)
+                }, 10);
+                    clearInterval(laser)
+           }
+        }
+        // toutesLesDivs[tir].classList.add('laser')
+        // toutesLesDivs[tir + 20].classList.remove('laser')
+    }, 100);
+
+
+
+    // let traineTir = tir
+    // while(tir > 19){
+    //     tir -= 20
+    //     toutesLesDivs[tir].classList.add('laser')
+    //     setTimeout(()=>{
+    //         while(tir <= 19){
+    //             toutesLesDivs[traineTir].classList.remove('laser')
+    //             if(traineTir > 0){
+    //                 traineTir -=20
+    //             }
+    //         }
+    //     },50)
+    // }
+    // toutesLesDivs[tir].classList.remove('laser')
+}
+
+function mouvementTireur(moove){
+
+    toutesLesDivs[tireurPosition].classList.remove('tireur')
+    // switch(moove.key){
+
+    //     case 'ArrowLeft':
+    //         if(tireurPosition % width !==0)
+    //         tireurPosition -=1
+    //         console.log(moove.key)
+    //         break
+    //     case 'ArrowRight':
+    //         if(tireurPosition % width <width -1)
+    //         tireurPosition +=1
+    //         break
+
+    //     case 'ArrowUp':
+    //         if(tireurPosition >200 && tireurPosition<240)
+    //         tireurPosition -=20
+    //         break
+    //     case 'ArrowDown':
+    //         if(tireurPosition >179 && tireurPosition<220)
+    //         tireurPosition +=20
+    //         break
+    // }
+    console.log(moove.key )
+    if(moove.key == 'ArrowLeft' && tireurPosition % width !==0 && fin == false){
+        tireurPosition -=1
+    }
+    else if (moove.key == 'ArrowRight'&& tireurPosition % width <width -1 && fin == false){
+        tireurPosition +=1
+    }
+    else if (moove.key == 'ArrowUp' && tireurPosition >199 && tireurPosition<240 && fin == false){
+        tireurPosition -=20
+    }
+    else if (moove.key == 'ArrowDown' && tireurPosition >179 && tireurPosition<220 && fin == false){
+        tireurPosition +=20
+    }
+    else if (moove.key == 'x' && fin == false){
+        laser()
+    }
+    toutesLesDivs[tireurPosition].classList.add('tireur')
+}
+
+function finDeJeu(){
+    if (alienInvaders.length == 0){
+        affichage.innerHTML = "c'est gagné !"
+        fin = true
     }
 }
 
-let mouvement = setInterval(mouvementAliens,100)
+document.addEventListener('keydown', mouvementTireur)
