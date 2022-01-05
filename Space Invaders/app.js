@@ -105,6 +105,16 @@ function mouvementAliens(){
     for (let i = 0; i <alienInvaders.length; i++) {
         toutesLesDivs[alienInvaders[i]].classList.add('alien')
     }
+
+    for(let i = 0; i < toutesLesDivs[tireurPosition].classList.length; i++){
+        if(toutesLesDivs[tireurPosition].classList[i] == 'tireur' && toutesLesDivs[tireurPosition].classList[i + 1] == 'alien'){
+            clearInterval(mouvement)
+            toutesLesDivs[tireurPosition].classList.add('boom')
+            toutesLesDivs[tireurPosition].classList.remove('alien')
+            affichage.innerHTML = 'Game over'
+
+        }
+    }
 }
 
-let mouvement = setInterval(mouvementAliens,500)
+let mouvement = setInterval(mouvementAliens,100)
