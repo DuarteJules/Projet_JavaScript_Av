@@ -1,7 +1,9 @@
 let cartesFlip = document.querySelectorAll('.double-face')
 let cartes = document.querySelectorAll('.carte')
 let popup = document.getElementById("popup1")
+let grille = document.querySelector(".grille")
 
+let cartesList = [...cartes] // liste des cartes
 let cartesFaceUp = [] //liste des cartes sélectionnées
 let cartesFlipList = [...cartesFlip] // liste de toutes les cartes
 let cartesFlipped = [] // liste des cartes retournées (qui ont matché)
@@ -78,6 +80,25 @@ function finDePartie(){
     document.getElementById("temps").innerHTML = tempsFinal;
     popup.classList.toggle("show");
 }
+function shuffleCards(){
+    while (grille.firstChild){
+        grille.removeChild(grille.firstChild)
+    }
+    cartesList = [...cartes]
+    // grille.querySelectorAll('*').forEach(n => n.remove())
+    while ( cartesList.length > 0){
+        let taille = cartesList.length
+        let index = randomNbr(taille-1)
+        console.log("taille = " + taille)
+        console.log(index)
+        grille.appendChild(cartesList[index])
+        cartesList.splice(index, 1)
+    }
+}
+
+function randomNbr(max){
+    return Math.floor(Math.random()*max)
+}
 
 // function sleep(milliseconds) {
 //     const date = Date.now();
@@ -124,12 +145,14 @@ function Timer(){
 }
 
 function replay(){ //l'event listener marche une foi sur deux pour une raison obscure
-    for( let i = 0; i<cartesFlipList.length; i++){
+    shuffleCards();
+    for(let i=0; i<cartesFlipList.length; i++){
         cartesFlipList[i].classList.toggle("active")
         cartesFlipList[i].addEventListener("click", function e (){
             cartesFlipList[i].classList.toggle("active")
         })
     }
+    
     second = 0
     minute = 0
     Timer()
