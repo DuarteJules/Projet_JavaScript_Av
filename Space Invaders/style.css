@@ -33,11 +33,14 @@ h3 {
     transform: rotate(180deg);
     background-position: center;
     background-size: contain;
+    background-repeat : no-repeat;
 }
 .alien {
     background: url(ressources/ennemies.png);
     background-position: center;
     background-size: contain;
+    background-repeat : no-repeat;
+   
 }
 .boom {
     background-color: red;
