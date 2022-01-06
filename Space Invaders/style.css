@@ -48,3 +48,26 @@ h3 {
 .laser {
     background-color: orange;
 }
+
+#winGame{
+    visibility: hidden;
+    display: flex;    
+    justify-content: center;
+}
+#btnWin{
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#looseGame{
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#btnLoose{
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+}

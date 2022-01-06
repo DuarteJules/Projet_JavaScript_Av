@@ -1,6 +1,10 @@
-
 const container = document.querySelector('.grille');
 const affichage = document.querySelector('h3');
+let gameWin = document.getElementById('winGame')
+let boutonWin = document.getElementById('btnWin')
+let looseGame = document.getElementById('looseGame')
+let boutonLoose = document.getElementById('btnLoose')
+
 let resultats = 0;
 let toutesLesDivs;
 let alienInvaders = [];
@@ -116,6 +120,8 @@ function mouvementAliens(){
             toutesLesDivs[tireurPosition].classList.remove('alien')
             affichage.innerHTML = 'Game over'
             fin = true
+            looseGame.setAttribute('style','visibility:visible')
+            boutonLoose.setAttribute('style','visibility:visible')
         }
     }
     finDeJeu()
@@ -221,9 +227,11 @@ function mouvementTireur(moove){
 
 function finDeJeu(){
     if (alienInvaders.length == 0){
-        affichage.innerHTML = "c'est gagné !"
         fin = true
+        gameWin.setAttribute('style','visibility:visible')
+        boutonWin.setAttribute('style','visibility:visible')
     }
+  
 }
 
 document.addEventListener('keydown', mouvementTireur)
