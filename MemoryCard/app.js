@@ -28,6 +28,7 @@ function ComparaisonCarte(){
                     console.log(cartesFlipped)
                     if(winCond() == true){
                         finDePartie()
+                        cartesFlipped = []
                         console.log("ouais")
                     }
                     cartesFaceUp = []
@@ -120,6 +121,20 @@ function Timer(){
             second = 0;
         }
     },1000)
+}
+
+function replay(){ //l'event listener marche une foi sur deux pour une raison obscure
+    for( let i = 0; i<cartesFlipList.length; i++){
+        cartesFlipList[i].classList.toggle("active")
+        cartesFlipList[i].addEventListener("click", function e (){
+            cartesFlipList[i].classList.toggle("active")
+        })
+    }
+    second = 0
+    minute = 0
+    Timer()
+    popup.classList.toggle("show")
+
 }
 
 //y'avait selection carte à un moment mais je l'ai suppr oupsi
