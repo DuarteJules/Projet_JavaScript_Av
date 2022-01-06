@@ -9,6 +9,7 @@ let direction = 1;
 let width = 20;
 let fin = false
 let score = 0
+let cadenceTir = 1
 
 function creationGrilleEtAliens(){
 
@@ -208,8 +209,12 @@ function mouvementTireur(moove){
     else if (moove.key == 'ArrowDown' && tireurPosition >179 && tireurPosition<220 && fin == false){
         tireurPosition +=20
     }
-    else if (moove.key == 'x' && fin == false){
+    else if (moove.key == 'x' && fin == false && cadenceTir == 1){
+        cadenceTir = 0
         laser()
+        setTimeout(() => {
+            cadenceTir = 1
+        }, 1000);
     }
     toutesLesDivs[tireurPosition].classList.add('tireur')
 }
