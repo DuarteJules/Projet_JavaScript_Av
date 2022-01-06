@@ -83,3 +83,59 @@ body {
   flex-direction: column;
   margin-top: 50px;
 }
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: linear-gradient(to right, #b993d6, #8ca6db);
+  border-radius: 5px;
+  width: 85%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+.popup h2{
+  margin-top: 0;
+}
+.popup content-1,
+content-2 {
+  max-height: 30%;
+  overflow: auto;
+  text-align:center;
+}
+
+/* .popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: linear-gradient(to right, #b993d6, #8ca6db);
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left : 50%;
+  margin-left: -80px;
+} */
+.show{
+  visibility: visible !important;
+  opacity: 100 !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 70;
+  bottom: 70;
+  left: 70;
+  right: 70;
+  background: linear-gradient(to right, #8946bd, #577bc4);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}

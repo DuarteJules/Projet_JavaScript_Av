@@ -1,7 +1,10 @@
 let cartesFlip = document.querySelectorAll('.double-face')
 let cartes = document.querySelectorAll('.carte')
-let cartesFaceUp = []
-let cartesFlipList = [...cartesFlip]
+let popup = document.getElementById("popup1")
+
+let cartesFaceUp = [] //liste des cartes sélectionnées
+let cartesFlipList = [...cartesFlip] // liste de toutes les cartes
+let cartesFlipped = [] // liste des cartes retournées (qui ont matché)
 
 for( let i = 0; i<cartesFlipList.length; i++){
     cartesFlipList[i].addEventListener("click", flip)
@@ -17,11 +20,27 @@ function ComparaisonCarte(){
                 if(motifCarte1 == motifCarte2){
                     console.log("NIQUE")
                     cartesFaceUp[0].removeEventListener('click', flip)
+                    // cartesFaceUp[0].classList.toggle("unclickable")
                     cartesFaceUp[1].removeEventListener('click', flip)
+                    // cartesFaceUp[1].classList.toggle("unclickable")
+                    cartesFlipped.push(cartesFaceUp[0])
+                    cartesFlipped.push(cartesFaceUp[1])
+                    console.log(cartesFlipped)
+                    if(winCond() == true){
+                        finDePartie()
+                        console.log("ouais")
+                    }
                     cartesFaceUp = []
-                }else{
-                    cartesFaceUp[0].classList.toggle("active")
-                    cartesFaceUp[1].classList.toggle("active")
+                }else if(motifCarte1 != motifCarte2 && cartesFaceUp.length == 2){
+                    delayedFlip(cartesFaceUp[0],cartesFaceUp[1])
+                    // cartesFaceUp[0].classList.toggle("active")
+                    // cartesFaceUp[1].classList.toggle("active")
+                    // cartesFlipped.push(cartesFaceUp[0])
+                    // cartesFlipped.push(cartesFaceUp[1])
+                    // noMatch(cartesFaceUp[0])
+                    // noMatch(cartesFaceUp[1])
+                    // setTimeout(() => {cartesFaceUp[0].classList.toggle("active") }, 300)
+                    // setTimeout(() => {cartesFaceUp[1].classList.toggle("active") }, 300)
                     cartesFaceUp = []
                 }
             }
@@ -33,6 +52,59 @@ function flip(event){
     this.classList.toggle("active");
 }
 
+// function syncDelay(milliseconds){
+//     var start = new Date().getTime();
+//     var end=0;
+//     while( (end-start) < milliseconds){
+//         end = new Date().getTime();
+//     }
+// }
+function delay(n){
+    return new Promise(function(resolve){
+        setTimeout(resolve,n*1000);
+    });
+}
+
+async function delayedFlip(carte1,carte2){
+    await delay(1)
+    carte1.classList.toggle("active")
+    carte2.classList.toggle("active")
+}
+
+function finDePartie(){
+    clearInterval(interval);
+    let tempsFinal = timer.innerHTML ;
+    document.getElementById("temps").innerHTML = tempsFinal;
+    popup.classList.toggle("show");
+}
+
+// function sleep(milliseconds) {
+//     const date = Date.now();
+//     let currentDate = null;
+//     do {
+//     currentDate = Date.now();
+//     } while (currentDate - date < milliseconds);
+// }
+// function noMatch(carte){
+//     carte.classList.toggle("active")
+// }
+
+//VICTOIRE//
+
+function winCond(){
+    // cartesFlipList.forEach(element => {
+    //     if(element.classList.contains("unclickable") == true){
+    //         cartesFlipped.push(element)
+    //         console.log(cartesFlipped.length)
+    //     }if(cartesFlipped.length == 12){
+    //         console.log("HAHAHAHHAHAH")
+    //     }
+    // });
+    if(cartesFlipped.length == 12){
+        console.log('victoire')
+        return true
+    }return false
+}
 //TIMER//
 
 let second = 0, minute = 0;
@@ -50,6 +122,7 @@ function Timer(){
     },1000)
 }
 
-
+//y'avait selection carte à un moment mais je l'ai suppr oupsi
 ComparaisonCarte()
 Timer()
+// winCond()
