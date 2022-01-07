@@ -202,7 +202,6 @@ function mouvementTireur(moove){
     //         tireurPosition +=20
     //         break
     // }
-    console.log(moove.key )
     if(moove.key == 'ArrowLeft' && tireurPosition % width !==0 && fin == false){
         tireurPosition -=1
     }
@@ -226,6 +225,13 @@ function mouvementTireur(moove){
 }
 
 function finDeJeu(){
+    for(let i = 0; i < alienInvaders.length; i++){
+        if(alienInvaders[i]<=239 && alienInvaders[i] >= 220){
+            affichage.innerHTML = "c'est perdu !"
+            clearInterval(mouvement)
+            fin = true
+        }
+    }
     if (alienInvaders.length == 0){
         fin = true
         gameWin.setAttribute('style','visibility:visible')
