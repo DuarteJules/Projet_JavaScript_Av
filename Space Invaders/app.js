@@ -15,6 +15,9 @@ let fin = false
 let score = 0
 let cadenceTir = 1
 
+document.querySelector('body').ontouchend=(e) =>{
+    e.preventDefault();
+}
 function creationGrilleEtAliens(){
 
     let indexAttr = 0;
@@ -118,7 +121,6 @@ function mouvementAliens(){
             clearInterval(mouvement)
             toutesLesDivs[tireurPosition].classList.add('boom')
             toutesLesDivs[tireurPosition].classList.remove('alien')
-            affichage.innerHTML = 'Game over'
             fin = true
             looseGame.setAttribute('style','visibility:visible')
             boutonLoose.setAttribute('style','visibility:visible')
@@ -227,9 +229,10 @@ function mouvementTireur(moove){
 function finDeJeu(){
     for(let i = 0; i < alienInvaders.length; i++){
         if(alienInvaders[i]<=239 && alienInvaders[i] >= 220){
-            affichage.innerHTML = "c'est perdu !"
             clearInterval(mouvement)
             fin = true
+            looseGame.setAttribute('style','visibility:visible')
+            boutonLoose.setAttribute('style','visibility:visible')
         }
     }
     if (alienInvaders.length == 0){
