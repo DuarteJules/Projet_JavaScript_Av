@@ -4,7 +4,7 @@ let gameWin = document.getElementById('winGame')
 let boutonWin = document.getElementById('btnWin')
 let looseGame = document.getElementById('looseGame')
 let boutonLoose = document.getElementById('btnLoose')
-
+let html = document.querySelector('html')
 let resultats = 0;
 let toutesLesDivs;
 let alienInvaders = [];
@@ -124,6 +124,8 @@ function mouvementAliens(){
             fin = true
             looseGame.setAttribute('style','visibility:visible')
             boutonLoose.setAttribute('style','visibility:visible')
+            html.setAttribute('style','overflow:visible')
+
         }
     }
     finDeJeu()
@@ -233,12 +235,15 @@ function finDeJeu(){
             fin = true
             looseGame.setAttribute('style','visibility:visible')
             boutonLoose.setAttribute('style','visibility:visible')
+            html.setAttribute('style','overflow:visible')
         }
     }
     if (alienInvaders.length == 0){
         fin = true
         gameWin.setAttribute('style','visibility:visible')
         boutonWin.setAttribute('style','visibility:visible')
+        html.setAttribute('style','overflow:visible')
+
     }
   
 }
