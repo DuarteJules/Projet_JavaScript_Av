@@ -6,7 +6,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(to right, #b993d6, #8ca6db); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #d39aff, #75a3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .grille {
@@ -58,7 +58,7 @@ body {
   width: 120px;
 }
 .arriere {
-  background: #333;
+  background: rgb(75, 74, 74);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,9 +71,13 @@ body {
   pointer-events: none;
 }
 
-.timer {
+.timer {
   display: inline-block;
   margin: 0 1rem;
+  background: linear-gradient(to right, #e1b9ff, #a6c4ff);
+  padding : 5px;
+  border-radius: 15px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .container{
@@ -104,7 +108,7 @@ content-2 {
   text-align:center;
 }
 .popup p{
-  margin-top:8px;
+  margin-top: 5px;
 }
 /* .popup .popuptext {
   visibility: hidden;

@@ -8,7 +8,7 @@ let cartesFaceUp = [] //liste des cartes sélectionnées
 let cartesFlipList = [...cartesFlip] // liste de toutes les cartes
 let cartesFlipped = [] // liste des cartes retournées (qui ont matché)
 
-for( let i = 0; i<cartesFlipList.length; i++){
+for( let i = 0; i<cartesFlipList.length; i++){//permet de retourner la carte
     cartesFlipList[i].addEventListener("click", flip)
 }
 
@@ -49,7 +49,7 @@ function ComparaisonCarte(){
     });
 }
 
-function flip(event){
+function flip(event){//retourne une carte
     this.classList.toggle("active");
 }
 
@@ -60,25 +60,25 @@ function flip(event){
 //         end = new Date().getTime();
 //     }
 // }
-function delay(n){
+function delay(n){//créer un délai de n secondes
     return new Promise(function(resolve){
         setTimeout(resolve,n*1000);
     });
 }
 
-async function delayedFlip(carte1,carte2){
+async function delayedFlip(carte1,carte2){//retourne la carte 1 seconde après
     await delay(1)
     carte1.classList.toggle("active")
     carte2.classList.toggle("active")
 }
 
-function finDePartie(){
+function finDePartie(){//arrête et récupère le temps
     clearInterval(interval);
     let tempsFinal = timer.innerHTML ;
     document.getElementById("temps").innerHTML = tempsFinal;
     popup.classList.toggle("show");
 }
-function shuffleCards(){
+function shuffleCards(){//mélange les cartes
     while (grille.firstChild){
         grille.removeChild(grille.firstChild)
     }
@@ -92,7 +92,7 @@ function shuffleCards(){
     }
 }
 
-function randomNbr(max){
+function randomNbr(max){ //génère un nombre aléatoire
     return Math.floor(Math.random()*max)
 }
 
@@ -165,6 +165,8 @@ function Timer(){
 //     minute = 0
 //     Timer()
 //     popup.classList.toggle("show")
+//ComparaisonCarte()
+//Timer()
 // }
 //y'avait selection carte à un moment mais je l'ai suppr oupsi
 shuffleCards()
