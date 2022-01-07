@@ -4,6 +4,8 @@ html {
 body {
     background-color:white;
     background-image:url(ressources/spaceInvader.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
     }
 .grille {
     display: flex;
