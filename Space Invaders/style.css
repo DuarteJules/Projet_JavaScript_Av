@@ -1,7 +1,15 @@
+html {
+    overflow:hidden;
+  }
+  #top{
+      text-decoration: none;
+      color: black;
+  }
 body {
-    color:black;
     background-color:white;
     background-image:url(ressources/spaceInvader.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
     }
 .grille {
     display: flex;
@@ -9,48 +17,38 @@ body {
     border: 1px solid #000;
     width: 500px;
     height: 500px;
+    margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     background: url(ressources/background-black.png);
     animation: background-defile 5s linear infinite;
-    justify-content: left;
-    
 }
-#marge{
-    width: 450px
-}
-#imgX{
-    width: 8%;
-    height: 8%;
-}
-#imgBas{
-    width: 8%;
-    height: 8%;
-}
-#imgGauche{
-    width: 8%;
-    height: 8%;
-}
-#imgDroite{
-    width: 8%;
-    height: 8%;
-}
-#imgHaut{
-    width: 8%;
-    height: 8%;
-}
-#grilleAndMarge{
-    display:inline-flex;
 
-}
-#grilleAndMarge#grille{
+p{
+    display: flex;
     justify-content: center;
-
-}
-#marge{
-    font-size: medium;
     color: yellow;
 }
 
+#imgX{
+    width: 2%;
+    height: 2%;
+}
+#imgBas{
+    width: 2%;
+    height: 2%;
+}
+#imgGauche{
+    width: 2%;
+    height: 2%;
+}
+#imgDroite{
+    width: 2%;
+    height: 2%;
+}
+#imgHaut{
+    width: 2%;
+    height: 2%;
+}
 @keyframes background-defile {
     from {
         background-position-y: 0px;
