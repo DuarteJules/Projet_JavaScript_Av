@@ -249,3 +249,10 @@ function finDeJeu(){
 }
 
 document.addEventListener('keydown', mouvementTireur)
+
+boutonLoose.addEventListener('click',e =>{
+location.reload()
+})
+boutonWin.addEventListener('click',e =>{
+    location.reload()
+    })
