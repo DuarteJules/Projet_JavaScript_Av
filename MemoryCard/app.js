@@ -13,7 +13,7 @@ for( let i = 0; i<cartesFlipList.length; i++){
 }
 
 function ComparaisonCarte(){
-    cartesFlip.forEach(element => {
+    cartesFlipList.forEach(element => {
         element.addEventListener('click', function compare (){
             cartesFaceUp.push(element)
             if(cartesFaceUp.length === 2){
@@ -27,11 +27,9 @@ function ComparaisonCarte(){
                     // cartesFaceUp[1].classList.toggle("unclickable")
                     cartesFlipped.push(cartesFaceUp[0])
                     cartesFlipped.push(cartesFaceUp[1])
-                    console.log(cartesFlipped)
                     if(winCond() == true){
                         finDePartie()
                         cartesFlipped = []
-                        console.log("ouais")
                     }
                     cartesFaceUp = []
                 }else if(motifCarte1 != motifCarte2 && cartesFaceUp.length == 2){
@@ -89,8 +87,6 @@ function shuffleCards(){
     while ( cartesList.length > 0){
         let taille = cartesList.length
         let index = randomNbr(taille-1)
-        console.log("taille = " + taille)
-        console.log(index)
         grille.appendChild(cartesList[index])
         cartesList.splice(index, 1)
     }
@@ -114,6 +110,7 @@ function randomNbr(max){
 //VICTOIRE//
 
 function winCond(){
+//renvoie true si toutes les cartes sont retournées
     // cartesFlipList.forEach(element => {
     //     if(element.classList.contains("unclickable") == true){
     //         cartesFlipped.push(element)
@@ -134,6 +131,7 @@ let timer = document.querySelector(".timer")
 let interval
 
 function Timer(){
+    //lance le timer
     interval = setInterval(function(){
         timer.innerHTML = minute+" mins "+ second+ " secs"
         second++;
@@ -144,23 +142,36 @@ function Timer(){
     },1000)
 }
 
-function replay(){ //l'event listener marche une foi sur deux pour une raison obscure
-    shuffleCards();
-    for(let i=0; i<cartesFlipList.length; i++){
-        cartesFlipList[i].classList.toggle("active")
-        cartesFlipList[i].addEventListener("click", function e (){
-            cartesFlipList[i].classList.toggle("active")
-        })
-    }
-    
-    second = 0
-    minute = 0
-    Timer()
-    popup.classList.toggle("show")
+// function replay(){ //l'event listener marche une foi sur deux pour une raison obscure
+//     // quand je clique sur replay
+//     //je veux retourner les cartes
+//     //mélanger les cartes et réattribuer un event sur le click
+//     //cacher le pop up 
+//     shuffleCards();
+//     cartesList = [...cartes] // liste des cartes
+//     cartesFaceUp = [] //liste des cartes sélectionnées
+//     cartesFlipList = [...cartesFlip] // liste de toutes les cartes
+//     cartesFlipped = [] // liste des cartes retournées (qui ont matché)
 
-}
-
+//     cartesFlipList = [...cartesFlip]
+//     cartesFlipList.forEach(element => {
+//         element.classList.toggle("active")
+//         element.addEventListener("click", function e(){
+//             element.classList.toggle("active")
+//         }
+//     );
+// })
+//     second = 0
+//     minute = 0
+//     Timer()
+//     popup.classList.toggle("show")
+// }
 //y'avait selection carte à un moment mais je l'ai suppr oupsi
+shuffleCards()
 ComparaisonCarte()
 Timer()
-// winCond()
+
+
+function startGame(){
+    location.reload()
+}
